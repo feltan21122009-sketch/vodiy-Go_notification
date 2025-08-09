@@ -30,10 +30,14 @@ let subscriptions = [];
 
 // Разрешить запросы с фронта
 app.use(cors({
-  origin: 'https://9000-firebase-studio-1752840810300.cluster-ubrd2huk7jh6otbgyei4h62ope.cloudworkstations.dev/',
+  origin: [
+    'https://9000-firebase-studio-1752840810300.cluster-ubrd2huk7jh6otbgyei4h62ope.cloudworkstations.dev',
+    'https://vodiy-go.vercel.app/'
+  ],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
+
 
 // Сохраняем подписку только пока жив сервер
 app.post('/subscribe', (req, res) => {
