@@ -28,12 +28,21 @@ webPush.setVapidDetails(
 // Подписки в памяти (но не храним старые)
 let subscriptions = [];
 
-// Разрешить запросы с фронта
+const allowedOrigins = [
+  'https://9000-firebase-studio-1752840810300.cluster-ubrd2huk7jh6otbgyei4h62ope.cloudworkstations.dev',
+  'https://vodiy-go.vercel.app'
+];
+
 app.use(cors({
-  origin: [
-    'https://9000-firebase-studio-1752840810300.cluster-ubrd2huk7jh6otbgyei4h62ope.cloudworkstations.dev',
-    'https://vodiy-go.vercel.app/'
-  ],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // Разрешить без Origin (например, Postman)
+    const cleanOrigin = origin.replace(/\/$/, ''); // убираем / в конце
+    if (allowedOrigins.includes(cleanOrigin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
