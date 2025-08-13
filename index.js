@@ -174,8 +174,8 @@ db.collection('orders')
         // payload включая clientName/clientPhone/rideId/orderId
         const payload = {
           title: 'Новый заказ',
-          body: `Клиент: ${order.clientName || '-'} \n Тел: ${order.clientPhone || '-'}`,
-          data: { orderId: change.doc.id, rideId: order.rideId, url: '/admin', },
+          body: `Клиент: ${order.clientName || '-'} \nТел: ${order.clientPhone || '-'}`,
+          data: { orderId: change.doc.id, rideId: order.rideId, url: '/driver/my-orders', },
           icon: './driver-png.png',
           badge: './driver-badge.png'
         };
